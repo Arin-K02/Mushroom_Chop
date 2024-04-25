@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+using System;
+
 public class SoundManager : MonoBehaviour
 {
 
@@ -20,7 +22,15 @@ public class SoundManager : MonoBehaviour
         {
             SetMusicVolume();
         }
-        DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Audio"));
+
+        try
+        {
+            DontDestroyOnLoad(GameObject.FindGameObjectWithTag("Audio"));
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("volume was not set");
+        }
     }
 
     public void SetMusicVolume()
